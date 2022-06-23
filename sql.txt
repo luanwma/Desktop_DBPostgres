@@ -1,0 +1,24 @@
+create table usuarios (nome varchar(20), senha varchar(10));
+insert into usuarios values ('admin', 'admin');
+
+create table cliente (id_cliente serial constraint pk_id_cliente primary key,
+	tipo varchar(10), nome varchar(50), email varchar(30), telefone varchar(12),
+	documento1 varchar(18), documento2	varchar(30),
+	estado varchar(3), cidade varchar(20), bairro varchar(20),
+	rua varchar(20), numero int , complemento varchar(20));
+
+
+create table produto (id_produto serial constraint pk_id_produto primary key,
+	 nome varchar(50), preco numeric not null, descricao varchar(100));
+
+
+create table item_venda (id_item_venda serial constraint pk_id_item_venda primary key ,
+						id_produto_item int not null, 
+	quantidade int not null,
+	valor_item real	not null				);
+
+
+create table venda (id_venda serial constraint id_venda primary key ,
+					id_cliente int constraint id_item_cliente references cliente,
+					id_item_venda int constraint id_item_venda references item_venda, 
+		valor_total real 	);
